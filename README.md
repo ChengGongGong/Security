@@ -40,8 +40,13 @@
               2. IE6、7下使用window.open，也会缺失Referer。
               3. HTTPS页面跳转到HTTP页面，所有浏览器Referer都丢失。
               4. 点击Flash上到达另外一个网站的时候，Referer的情况就比较杂乱，不太可信。
-          
-          
+        b. Samesite Cookie：为Set-Cookie响应头新增Samesite属性，它用来标明这个 Cookie是个“同站 Cookie”，同站Cookie只能作为第一方Cookie，不能作为第三方Cookie    
+          1. 严格模式，Samesite=Strict，表明这个 Cookie 在任何情况下都不可能作为第三方 Cookie。
+                该模式下，CSRF攻击基本没有机会，但是跳转子域名或者是新标签重新打开刚登陆的网站，之前的Cookie都不会存在，需要重新登录。
+          2. 宽松模式，Samesite=Lax，假如这个请求是改变了当前页面或者打开了新页面且同时是个GET请求，则这个Cookie可以作为第三方Cookie
+          3. 存在的问题：
+                1. 兼容性不是很好，
+                2. 不支持子域，即不能使用SamesiteCookie在主域名存储用户登录信息。每个子域名都需要用户重新登录一次。
           
           
           
